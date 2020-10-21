@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.10)
+set(CMAKE_C_COMPILER gcc)
+set(CMAKE_CXX_COMPILER g++)
+project(vector_basic)
+add_executable(vector_constructor src/vector_constructor.cpp)
+add_executable(vector_member src/vector_member.cpp)
+add_executable(vector_member_v2 src/vector_member_v2.cpp)
+add_executable(vector_assign src/vector_assign.cpp)
+install(TARGETS vector_constructor vector_member vector_member_v2 vector_assign 
+RUNTIME DESTINATION G:/cpp_work/vector_basic/src)
