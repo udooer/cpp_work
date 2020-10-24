@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
 using namespace std;
-vector<double> randVector(int, int, int);
+vector<double> randDoubleVector(int, int, int);
 void printArray(double *first, int size){
     for(int i=0;i<size;i++)
         cout<<*(first+i)<<' ';
@@ -20,7 +20,7 @@ void insertionSort(vector<double> &v){
 }
 int main(){
     vector<double> v_unsorted;
-    v_unsorted = randVector(20, 0, 100);
+    v_unsorted = randDoubleVector(20, 0, 100);
     cout<<"before sorted: \n";
     printArray(v_unsorted.data(), v_unsorted.size());
     insertionSort(v_unsorted);

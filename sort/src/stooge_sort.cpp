@@ -2,7 +2,7 @@
 #include<vector>
 #include<cmath>
 using namespace std;
-vector<double> randVector(int, int, int);
+vector<double> randDoubleVector(int, int, int);
 void printArray(double *first, int size){
     for(int i=0;i<size;i++)
         cout<<*(first+i)<<' ';
@@ -24,7 +24,7 @@ void stoogeSort(vector<double> &v, int start, int end){
     stoogeSort(v, start, start+step-1);
 }
 int main(){
-    vector<double> v_unsorted = randVector(20, 0, 100);
+    vector<double> v_unsorted = randDoubleVector(20, 0, 100);
     cout<<"before sorted:\n";
     printArray(v_unsorted.data(), v_unsorted.size());
     stoogeSort(v_unsorted, 0, v_unsorted.size()-1);
