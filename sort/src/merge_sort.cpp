@@ -8,49 +8,58 @@ void printArray(int *first, int size){
     cout<<'\n';
     return;
 }
-vector<int> merge(vector<int> A, vector<int> B){
-    int a = A.size();
-    int b = B.size();
-    vector<int> output(a+b);
+void merge(vector<int> &v, int start, int mid, int end){
+    int a = mid-start+1;
+    int b = end-mid;
     int i=0, j=0;
-    while( (i+j)<=(a+b) ){
-        if(i<=a && j<=b){
+    vector<int> A(v.begin()+start, v.begin()+mid+1);
+    vector<int> B(v.begin()+mid+1, v.begin()+end+1);
+    while( (i+j)<(a+b) ){
+        if(i<a && j<b){
             if(A[i]<=B[j]){
-                output[i+j] = A[i];
+                v[i+j+start] = A[i];
                 i++;
             }
             else{
-                output[i+j] = B[j];
+                v[i+j+start] = B[j];
                 j++;
             }
         }
-        else if(i==a && j<=b){
-            for(int k=j;k<b;k++)
-                output[i+k] = B[k];
+        else if(i==a && j<b){
+            for(;j<b;j++)
+                v[i+j+start] = B[j];
         }
-        else if(i<=a && j==b){
-            for(int k=i;k<a;k++)
-                output[k+j] = A[k];
+        else if(i<a && j==b){
+            for(;i<a;i++)
+                v[i+j+start] = A[i];
         }
     }
-    return output;
+    // cout<<"finishing MERGING!!!\n\n";
 }
-vector<int> mergeSort(vector<int>& v, int start, int end){
+void mergeSort(vector<int>& v, int start, int end){
     int number = end-start+1;
     if(number==2){
-        if(v[start]>v[end])
+        if(v[start]>v[end]){
             swap(v[start], v[end]);
+        }
         return;
     }
-    else if(number<=1)
+    else if(number==1){
         return;
-    int step = number/2
-    vector<int> A = mergeSort(v, start, start+step-1);
-    vector<int> B = mergeSort(v, start+step, end);
-    return merge(A, B);
+    }
+    // cout<<"number is "<<number<<", end is "<<end<<", start is "<<start<<'\n';
+    int step = number/2;
+    mergeSort(v, start, start+step-1);
+    // cout<<"finish A & print A is :";
+    // printArray(A.data(), A.size());
+    mergeSort(v, start+step, end);
+    // cout<<"finish B & print B is :";
+    // printArray(B.data(), B.size());
+    merge(v, start, start+step-1, end);
+    // printArray(ans.data(), ans.size());
 }
 int main(){
-    vector<int> v_unsorted = randIntVector(8, 0, 100);
+    vector<int> v_unsorted = randIntVector(20, 0, 100);
     cout<<"before sorted:\n";
     printArray(v_unsorted.data(), v_unsorted.size());
     mergeSort(v_unsorted, 0, v_unsorted.size()-1);
