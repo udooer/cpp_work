@@ -3,7 +3,7 @@
 using namespace std;
 struct header{
     char chunk_id[4]={'R', 'I', 'F', 'F'};//{(char)0x52, (char)0x49, (char)0x46, (char)0x46};
-    int chunk_size=20*4*2+44;
+    int chunk_size=200000*4*2+44;
     char format[4]={'W', 'A', 'V', 'E'};//{(char)0x57, (char)0x41, (char)0x56, (char)0x45};
     char subchunk1_id[4] = {'f', 'm', 't', ' '};//{(char)0x66, (char)0x6d, (char)0x74, (char)0x20};
     int subchunk1_size = 16;
@@ -14,14 +14,14 @@ struct header{
     short int block_align = 4*2;
     short int bits_per_sample = 4*8;
     char subchunk2_id[4] = {'d', 'a', 't', 'a'};//{(char)0x64, (char)0x61, (char)0x74, (char)0x61};
-    int subchunk2_size = 20*4*2;    
+    int subchunk2_size = 200000*4*2;    
 }header_file;
 
 int main(){
     FILE* ofile = fopen("write.wav", "wb");
     fwrite(&header_file, 44, 1, ofile);
     int data;
-    for(int i=0; i<20;i++){
+    for(int i=0; i<200000;i++){
         data = i;
         fwrite(&data, 4, 1, ofile);
         data = -i;
